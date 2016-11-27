@@ -1,0 +1,39 @@
+<div class="tabs-striped tabs-top tabs-background-calm tabs-color-light">
+    <div class="tabs">
+        <a class="tab-item" href="/#/login">Login</a>
+        <a class="tab-item active" href="/#/register">Register</a>
+    </div>
+</div>
+<ion-content class="login">
+    <div class="login-logo" id="registerLogo">
+        <img src="../img/icon_logo.png" alt="Password Saver Logo">
+    </div>
+    <div class="list">
+        <label class="item item-input">
+            <i class="icon ion-person placeholder-icon"></i>
+            <input type="text" placeholder="Your Name" ng-model="newUser.name">
+        </label>
+        <label class="item item-input">
+            <i class="icon ion-person-stalker placeholder-icon"></i>
+            <input type="text" placeholder="User Name" ng-model="newUser.userName">
+        </label>
+        <label class="item item-input">
+            <i class="icon ion-email placeholder-icon"></i>
+            <input type="email" placeholder="Email ID" ng-model="newUser.emailId">
+        </label>
+        <label class="item item-input">
+            <i class="icon ion-eye placeholder-icon"></i>
+            <input type="password" placeholder="Password" ng-model="newUser.password">
+        </label>
+        <label class="item item-input">
+            <i class="icon ion-eye placeholder-icon"></i>
+            <input type="password" placeholder="Confirm Password" ng-model="newUser.cnfrmPassword">
+        </label>
+    </div>
+    <div class="login-buttons">
+        <p class="assertive">{{errorMsg}}</p>
+    </div>
+    <div class="login-buttons">
+        <button class="button button-calm" ng-click="registerUser()">Register</button>
+    </div>
+</ion-content>
