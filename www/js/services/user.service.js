@@ -11,7 +11,7 @@ angular.module('passwordSaver')
 
     function authenitcateUser(user) {
 
-        return SQLiteService.get('select userName , name from psusers where userName = ? and password = ?', [user.userName, user.password]).then(function(res) {
+        return SQLiteService.get('select userName , name from ps_users where userName = ? and password = ?', [user.userName, user.password]).then(function(res) {
             if (res.rows.length > 0) {
                 sessionStorage.userName = res.rows[0].userName;
                 return "User Authorized";
@@ -27,12 +27,13 @@ angular.module('passwordSaver')
             password = user.password,
             emailId = user.emailId,
             name = user.name,
-            query = "INSERT INTO psusers (userName, password, email) VALUES (?,?,?)";
+            query = "INSERT INTO ps_users (userName, name, password, email) VALUES (?,?,?,?)";
+     
+       SQLiteService.create('ps_users', [{ column: "userName", type: "text primary key" }, {column : "name", type:"text"}, { column: "password", type: "text" }, { column: "email", type: "text" }]);
 
-
-        return SQLiteService.checkTable('psusers', [{ column: "userName", type: "text primary key" }, {column : "name", type:"text"}, { column: "password", type: "text" }, { column: "email", type: "text" }]).then(function(res) {
+        return SQLiteService.checkTable('ps_users', [{ column: "userName", type: "text primary key" }, {column : "name", type:"text"}, { column: "password", type: "text" }, { column: "email", type: "text" }]).then(function(res) {
             if (res) {
-                return SQLiteService.insert('INSERT INTO psusers (userName,  name, password, email) VALUES (?,?,?,?)', [userName, name, password, emailId])
+                return SQLiteService.insert(query, [userName, name, password, emailId])
                     .then(function(res) {
                         if (res === "success") {
                             return "success";
@@ -45,13 +46,13 @@ angular.module('passwordSaver')
                         }
                     });
             } else {
-                SQLiteService.create('psusers', [{ column: "userName", type: "text primary key" }, {column : "name", type:"text"}, { column: "password", type: "text" }, { column: "email", type: "text" }]);
+                SQLiteService.create('ps_users', [{ column: "userName", type: "text primary key" }, {column : "name", type:"text"}, { column: "password", type: "text" }, { column: "email", type: "text" }]);
             }
         });
     }
 
     function forgotPassword(user) {
-        return SQLiteService.get('select email , userName, password from psusers where userName = ? and email = ?', [user.userName, user.emailId]).then(function(res) {
+        return SQLiteService.get('select email , userName, password from ps_users where userName = ? and email = ?', [user.userName, user.emailId]).then(function(res) {
 
             if (res.rows.length > 0) {
                 if (res.rows[0].userName === user.userName && res.rows[0].email === user.emailId) {
@@ -67,7 +68,7 @@ angular.module('passwordSaver')
     }
 
     function resetPassword(user) {
-        return SQLiteService.update('update psusers set password = ? where userName = ? and password = ?', [user.newPassword, user.userName, user.oldPassword])
+        return SQLiteService.update('update ps_users set password = ? where userName = ? and password = ?', [user.newPassword, user.userName, user.oldPassword])
             .then(function(res) {
                 console.log(res);
                 if (res.rowsAffected > 0) {

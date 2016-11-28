@@ -65,9 +65,38 @@
     height: 220px;
 }
 
-#about{
+#body{
     margin-top:50px;
 }
 .user-name{
+    color: #0a9dc7;
+}
+
+.ps-select{
+    width:80%;
+    margin:2%;
+    padding:2%;
+    border-radius:5px;
+    outline: none;
+    -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+}
+.ps-select :select;{
+    outline: none;
+}
+.items{
+    width:49%;
+    float:left;
+    padding:10px;
+    height:150px;
+}
+.items img{
+    width:140px;
+    height:80px;
+    margin:0 auto;
+}
+.items p{
+    text-align: center;
     color: #0a9dc7;
 }

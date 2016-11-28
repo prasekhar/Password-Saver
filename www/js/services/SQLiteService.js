@@ -27,6 +27,7 @@ angular.module('passwordSaver')
     function insert(query, params) {
         return $cordovaSQLite.execute(db, query, params).then(function(res) {
             if (res.insertId > 0) {
+                console.log(res);
                 return "success";
             } else {
                 return "failure"
@@ -79,6 +80,7 @@ angular.module('passwordSaver')
                 }
             },
             function(err) {
+                create(table_name, params);
                 console.log(err);
                 return false;
             });

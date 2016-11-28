@@ -49,11 +49,17 @@ angular.module('passwordSaver', ['ionic', 'ngCordova'])
             templateUrl: 'templates/register.html',
             controller: 'registerUserController'
         })
+        .state('myaccounts', {
+            url: '/myaccounts',
+            templateUrl: 'templates/myaccounts.html',
+            controller: ''
+        })
         .state('about', {
             url: '/about',
             templateUrl: 'templates/about.html',
             controller: ''
         });
+        
 
     $urlRouterProvider.otherwise('/login');
 

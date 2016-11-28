@@ -1,5 +1,5 @@
 angular.module('passwordSaver')
-    .directive('actionSheet', function($ionicActionSheet, $timeout, $state) {
+    .directive('actionSheet', function($ionicActionSheet, $state) {
         return {
             restrict: 'E',
             templateUrl: "../../templates/action-sheet.html",
@@ -15,12 +15,12 @@ angular.module('passwordSaver')
                     buttons: [
                         { text: 'Change Password' },
                         { text: 'About' },
-                        { text: 'Exit' }
+                        { text: '<i class="icon ion-power"></i> Exit' }
                     ],
                     titleText: 'Settings',
                     cancelText: 'Cancel',
                     cancel: function() {
-                        // add cancel code..
+                       hideSheet();
                     },
                     buttonClicked: function(index) {
                         if (index === 0) {
@@ -35,10 +35,6 @@ angular.module('passwordSaver')
                         return true;
                     }
                 });
-
-                $timeout(function() {
-                    hideSheet();
-                }, 10000);
 
             });
 
